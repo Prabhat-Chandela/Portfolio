@@ -12,9 +12,25 @@ export class DatabaseService {
         this.databases = new Databases(this.client);
     }
 
+
+    async createUserProfile({username,email,bio,profileimage,userId}) {
+        try {
+            return await this.databases.createDocument(config.appwriteDatabaseId, config.appwriteUsersCollectionId, userId,
+            {
+                username,
+                email,
+                bio,
+                profileimage
+            })
+            
+        } catch (error) {
+            console.log("Appwrite::createUserProfile::error::", error);
+        }
+    }
+
     async createPost({ caption, location, featuredfile, filetype, status, userId }) {
         try {
-            return await this.databases.createDocument(config.appwriteDatabaseId, config.appwriteCollectionId, ID.unique(),
+            return await this.databases.createDocument(config.appwriteDatabaseId, config.appwritePostsCollectionId, ID.unique(),
                 {
                     caption,
                     location,
@@ -31,7 +47,7 @@ export class DatabaseService {
 
     async deletePost(postId) {
         try {
-            await this.databases.deleteDocument(config.appwriteDatabaseId, config.appwriteCollectionId, postId);
+            await this.databases.deleteDocument(config.appwriteDatabaseId, config.appwritePostsCollectionId, postId);
             return true;
         } catch (error) {
             console.log("Appwrite::deletePost::error::", error);
@@ -41,7 +57,7 @@ export class DatabaseService {
 
     async updatePost(postId , { caption, location, status, userId }) {
         try {
-            return await this.databases.updateDocument(config.appwriteDatabaseId, config.appwriteCollectionId, postId,
+            return await this.databases.updateDocument(config.appwriteDatabaseId, config.appwritePostsCollectionId, postId,
                 {
                     caption,
                     location,
@@ -58,7 +74,7 @@ export class DatabaseService {
 
     async getPost(postId){
         try {
-            return await this.databases.getDocument(config.appwriteDatabaseId, config.appwriteCollectionId, postId);
+            return await this.databases.getDocument(config.appwriteDatabaseId, config.appwritePostsCollectionId, postId);
         } catch (error) {
             console.log("Appwrite::getPost::error::", error);
         }
@@ -66,7 +82,7 @@ export class DatabaseService {
 
     async getPosts(){
         try {
-           return await this.databases.listDocuments(config.appwriteDatabaseId, config.appwriteCollectionId);
+           return await this.databases.listDocuments(config.appwriteDatabaseId, config.appwritePostsCollectionId);
         } catch (error) {
             console.log("Appwrite::getPosts::error::", error);
         }

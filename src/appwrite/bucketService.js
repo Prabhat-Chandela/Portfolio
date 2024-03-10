@@ -20,6 +20,14 @@ export class BucketService {
         }
     }
 
+    async uploadProfileImage(profileImage) {
+        try {
+            return await this.bucket.createFile(config.appwriteProfileImageBucketId, ID.unique(), profileImage);
+        } catch (error) {
+            console.log("Appwrite::uploadProfileImage::error::" , error);
+        }
+    }
+
     async uploadVideoFile(videoFile) {
         try {
             return await this.bucket.createFile(config.appwriteVideoBucketId, ID.unique(), videoFile);
@@ -30,7 +38,7 @@ export class BucketService {
 
     async deleteFile(fileId) {
         try {
-            await this.bucket.deleteFile([config.appwriteImageBucketId , config.appwriteVideoBucketId], fileId);
+            await this.bucket.deleteFile([config.appwriteImageBucketId , config.appwriteVideoBucketId , config.appwriteProfileImageBucketId], fileId);
             return true;
         } catch (error) {
             console.log("Appwrite::deleteFile::error::" , error);
@@ -40,11 +48,12 @@ export class BucketService {
 
     async getFile(fileId) {
         try {
-            await this.bucket.getFile([config.appwriteImageBucketId , config.appwriteVideoBucketId], fileId);
+            await this.bucket.getFile([config.appwriteImageBucketId , config.appwriteVideoBucketId , config.appwriteProfileImageBucketId], fileId);
         } catch (error) {
             console.log("Appwrite::getFile::error::" , error);
         }
     }
+
 
 }
 
