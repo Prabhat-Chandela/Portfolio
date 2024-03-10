@@ -12,11 +12,19 @@ export class BucketService {
         this.bucket = new Storage(this.client);
     }
 
-    async uploadFile(file) {
+    async uploadImageFile(imageFile) {
         try {
-           return await this.bucket.createFile([config.appwriteImageBucketId , config.appwriteVideoBucketId], ID.unique(), file);
+           return await this.bucket.createFile(config.appwriteImageBucketId, ID.unique(), imageFile);
         } catch (error) {
-            console.log("Appwrite::uploadFile::error::" , error);
+            console.log("Appwrite::uploadImageFile::error::" , error);
+        }
+    }
+
+    async uploadVideoFile(videoFile) {
+        try {
+            return await this.bucket.createFile(config.appwriteVideoBucketId, ID.unique(), videoFile);
+        } catch (error) {
+            console.log("Appwrite::uploadVideoFile::error::" , error);
         }
     }
 
