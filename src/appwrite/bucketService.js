@@ -38,6 +38,14 @@ export class BucketService {
         }
     }
 
+    async getFile(fileId) {
+        try {
+            await this.bucket.getFile([config.appwriteImageBucketId , config.appwriteVideoBucketId], fileId);
+        } catch (error) {
+            console.log("Appwrite::getFile::error::" , error);
+        }
+    }
+
 }
 
 const bucketService = new BucketService();
