@@ -9,13 +9,14 @@ function Select({
 
     const id = useId()
   return (
-    <div className='w-full'>
+    <div className='w-fit flex items-center'>
+
         {label && <label className='' htmlFor={id} ></label>}
         <select {...props} id={id} ref={ref} 
-        className={` px-3 py-2 rounded-lg bg-transparent  text-black outline-none focus:border-orange-400  duration-200 border border-black w-full  ${className}`}>
+        className={` px-3 py-5 rounded-lg bg-orange-500 border-none text-white outline-none   duration-200 border w-fit  ${className}`}>
 
             {options?.map((option)=>(
-                <option key={option} value={option}>{option}</option>
+                <option className='bg-orange-500 text-white ' key={option} value={option}>{option}</option>
             ))}
 
         </select>

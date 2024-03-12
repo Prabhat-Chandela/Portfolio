@@ -1,9 +1,10 @@
 import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
-import { Inputfield, Select, Button } from '../index'
+import { Inputfield, Select, Button, Fileinput } from '../index'
 import bucketService from '../../appwrite/bucketService'
 import databaseService from '../../appwrite/databaseService'
 import { useSelector } from 'react-redux'
+import { FaVideo ,  FaImage } from "react-icons/fa6";
 
 function PostForm({ post }) {
 
@@ -57,9 +58,9 @@ function PostForm({ post }) {
 
     return (
 
-        <div className='w-full sm:px-6 '>
+        <div className='w-full sm:p-6 '>
 
-            <form onSubmit={handleSubmit(submit)} className="flex flex-wrap flex-col sm:flex-row   bg-white backdrop-filter backdrop-blur-md bg-opacity-50 shadow-lg  rounded-b-lg p-2">
+            <form onSubmit={handleSubmit(submit)} className="flex flex-wrap flex-col bg-white rounded-lg p-2">
 
                 <div className="w-full flex p-3 gap-7 ">
 
@@ -77,7 +78,7 @@ function PostForm({ post }) {
 
                 </div>
 
-                <div className="w-full  p-3 flex sm:gap-3">
+                <div className="w-full justify-center items-center p-3 flex  sm:gap-9">
 
                     <Select
                         options={["public", "private"]}
@@ -92,21 +93,8 @@ function PostForm({ post }) {
                         {...register("file", { required: true })}
                     />
 
-                    {selectedOption == 'image' &&
-                        (<Inputfield
-                            label="Featured Image :"
-                            type="file"
-                            accept="image/png, image/jpg, image/jpeg, image/gif"
-                            {...register("featuredimage", { required: true })}
-                        />)}
-                       
-                       {selectedOption == 'video' &&
-                        (<Inputfield
-                            label="Featured Video :"
-                            type="file"
-                            accept="image/png, image/jpg, image/jpeg, image/gif"
-                            {...register("featuredvideo", { required: true })}
-                        />)}
+                    <Fileinput><FaImage /></Fileinput>
+                    <Fileinput><FaVideo /></Fileinput>
 
 
 

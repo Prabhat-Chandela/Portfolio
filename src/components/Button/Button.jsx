@@ -4,8 +4,8 @@ import React from 'react'
 function Button({
     children,
     className = "",
-    bgColor = "bg-gradient-to-r from-purple-300 to-purple-500",
-    textColor = "text-white",
+    bgColor = "bg-black",
+    textColor = "text-orange-500",
     type = "button",
     ...props
 

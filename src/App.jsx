@@ -7,7 +7,7 @@ function App() {
 
   return (
     <>
-      <div className="max-w-screen min-h-screen bg-purple-100 text-white">
+      <div className="max-w-screen min-h-screen bg-orange-500">
       <Header/>
       <main className="sm: pl-[15%]">
       <Outlet/>

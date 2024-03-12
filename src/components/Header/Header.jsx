@@ -41,7 +41,7 @@ function Header() {
       ]
 
   return (
-    <header className='bg-white backdrop-filter backdrop-blur-md bg-opacity-50 shadow-lg sm:fixed sm:top-0 sm:bottom-0 w-[15%] mx-auto py-7'>
+    <header className='bg-white sm:fixed sm:top-0 sm:bottom-0 w-[15%] mx-auto py-7'>
    
       <nav className='flex flex-col items-start justify-center px-5 py-3 gap-y-16 w-full '>
 
@@ -57,11 +57,11 @@ function Header() {
         <ul className='flex flex-col gap-10 px-3 text-sm font-semibold items-center justify-center '>
           {navItems.map((item) => item.active ? (
 
-            <li className='' key={item.name}>
+            <li className='w-full' key={item.name}>
 
               <NavLink
                 to={item.slug}
-                className={({ isActive }) => ` tracking-wider rounded-md text-purple-500 hover:underline hover:underline-offset-8 duration-200 ${isActive ? 'underline underline-offset-8 ': null}`}
+                className={({ isActive }) => ` tracking-wider rounded-lg px-3 py-1  duration-200 ${isActive ? 'text-orange-500 bg-black': 'text-orange-500 hover:text-black'}`}
 
               >{item.name}</NavLink>
             </li>
