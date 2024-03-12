@@ -1,11 +1,18 @@
+import { Outlet } from "react-router-dom"
+import {Header} from "./components/index"
+
 
 function App() {
 
 
   return (
     <>
-      <div className="max-w-screen min-h-screen bg-gradient-to-r from-pink-500 to-yellow-500 text-white">Mega Project 02
-      
+      <div className="max-w-screen min-h-screen bg-purple-100 text-white">
+      <Header/>
+      <main className="sm: pl-[15%]">
+      <Outlet/>
+      </main>
+
       </div>
     </>
   )

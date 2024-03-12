@@ -56,66 +56,68 @@ function PostForm({ post }) {
 
 
     return (
-        <form onSubmit={handleSubmit(submit)} className="flex flex-wrap flex-col sm:flex-row text-black  p-2">
-            <div className="w-full sm:w-2/3 p-3 ">
-                <Inputfield
-                    label="Caption :"
-                    placeholder="Caption must be within 300 characters."
-                    className="mb-4"
-                    {...register("caption", { required: true })}
-                />
 
-                <Inputfield
-                    label="Location :"
-                    placeholder="Enter location related to the post."
-                    className="mb-4"
-                    {...register("location", { required: true })}
-                />
+        <div className='w-full sm:px-6 '>
 
-            </div>
+            <form onSubmit={handleSubmit(submit)} className="flex flex-wrap flex-col sm:flex-row   bg-white backdrop-filter backdrop-blur-md bg-opacity-50 shadow-lg  rounded-b-lg p-2">
 
-            <div className="w-full mb-5 sm:mb-0 sm:w-1/3 p-3 flex flex-col gap-5">
+                <div className="w-full flex p-3 gap-7 ">
 
-                <Select
-                    options={["public", "private"]}
-                    label="Status"
-                    className="mb-4"
-                    {...register("status", { required: true })}
-                />
+                    <Inputfield
+                        label="Caption :"
+                        placeholder="Enter a caption."
+                        {...register("caption", { required: true })}
+                    />
 
-                <Select
-                    options={["image", "video"]}
-                    label="File"
-                    onChange={onSelectChange}
-                    className="mb-4"
-                    {...register("status", { required: true })}
-                />
+                    <Inputfield
+                        label="Location :"
+                        placeholder="Enter location related to the post."
+                        {...register("location", { required: true })}
+                    />
 
-                {selectedOption === 'image' ?
-                    (<Inputfield
-                        label="Featured Image :"
-                        type="file"
-                        className="mb-4 py-20  "
-                        accept="image/png, image/jpg, image/jpeg, image/gif"
-                        {...register("featuredimage", { required: true })}
-                    />)
-                    :
-                    (<Inputfield
-                        label="Featured Video :"
-                        type="file"
-                        className="mb-4 py-20  "
-                        accept="image/png, image/jpg, image/jpeg, image/gif"
-                        {...register("featuredvideo", { required: true })}
-                    />)}
+                </div>
 
-               
+                <div className="w-full  p-3 flex sm:gap-3">
 
-                <Button type="submit">
-                    Submit
-                </Button>
+                    <Select
+                        options={["public", "private"]}
+                        label="Status"
+                        {...register("status", { required: true })}
+                    />
 
-            </div>
-        </form>
+                    <Select
+                        options={["image", "video"]}
+                        label="File"
+                        onChange={onSelectChange}
+                        {...register("file", { required: true })}
+                    />
+
+                    {selectedOption == 'image' &&
+                        (<Inputfield
+                            label="Featured Image :"
+                            type="file"
+                            accept="image/png, image/jpg, image/jpeg, image/gif"
+                            {...register("featuredimage", { required: true })}
+                        />)}
+                       
+                       {selectedOption == 'video' &&
+                        (<Inputfield
+                            label="Featured Video :"
+                            type="file"
+                            accept="image/png, image/jpg, image/jpeg, image/gif"
+                            {...register("featuredvideo", { required: true })}
+                        />)}
+
+
+
+                    <Button type="submit">
+                        Post
+                    </Button>
+
+                </div>
+            </form>
+
+        </div>
     );
 }
 export default PostForm
