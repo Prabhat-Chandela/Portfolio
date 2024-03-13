@@ -4,19 +4,19 @@ import { Link, useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { login as storeLogin } from '../../store/authSlice'
 import authService from '../../appwrite/authService'
-import Inputfield from '../Inputfield/Inputfield'
+import { Inputfield, Button } from '../index'
 
 function Login() {
-    const {handleSubmit , register} = useForm()
+    const { handleSubmit, register } = useForm()
     const navigate = useNavigate()
     const dispatch = useDispatch()
-    const login = async (data)=>{
+    const login = async (data) => {
         try {
             const userData = await authService.logIn(data);
-            if(userData){
+            if (userData) {
                 const userData = await authService.getUser();
-                if(userData){
-                    dispatch(storeLogin({userData}));
+                if (userData) {
+                    dispatch(storeLogin({ userData }));
                     navigate('/');
                 }
             }
@@ -26,31 +26,33 @@ function Login() {
     }
 
     return (
-        <div>
+        <div className='flex w-full border border-yellow-400 px-5 sm:px-9 pt-9'>
 
-            <section>
+            <section className='hidden sm:block w-1/2 bg-orange-500 p-5 rounded-l-lg'>
                 <div><img src="" alt="login page image" /></div>
             </section>
 
-            <section>
+            <section className='w-full sm:w-1/2 bg-white flex flex-col sm:p-5 p-3 rounded-lg sm:rounded-l-none '>
 
-                <div>
+                <div className='w-full flex flex-col gap-5'>
 
-                    <div>
+                    <div className='w-full flex items-center justify-center'>
                         Logo
                     </div>
 
-                    <h2 className="text-center text-xl sm:text-2xl text-orange-400 font-bold leading-tight">Log-In to your account</h2>
+                    <div>
+                        <h2 className="text-center text-xl sm:text-2xl text-orange-400 font-bold leading-tight">Log-In to your account</h2>
 
-                    <p className="mt-2 text-center text-base text-amber-100/60">
-                        Don&apos;t have any account?&nbsp;
-                        <Link
-                            to="/signup"
-                            className="font-medium text-primary transition-all duration-200 hover:underline"
-                        >
-                            Sign Up
-                        </Link>
-                    </p>
+                        <p className="mt-2 text-center text-base text-black/70">
+                            Don&apos;t have any account?&nbsp;
+                            <Link
+                                to="/signup"
+                                className="font-medium text-primary transition-all duration-200 hover:underline"
+                            >
+                                Sign Up
+                            </Link>
+                        </p>
+                    </div>
 
                 </div>
 

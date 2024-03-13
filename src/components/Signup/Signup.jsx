@@ -14,10 +14,10 @@ function Signup() {
     const signup = async (data) => {
         try {
             const userData = await authService.signUp(data);
-            if(userData){
+            if (userData) {
                 const userData = await authService.getUser();
-                if(userData){
-                    dispatch(storeLogin({userData}));
+                if (userData) {
+                    dispatch(storeLogin({ userData }));
                     navigate('/')
                 }
             }
@@ -28,31 +28,35 @@ function Signup() {
 
 
     return (
-        <div>
+        <div className='flex w-full px-5 pt-9 border border-yellow-400'>
 
-            <section>
+            <section className='hidden sm:block w-1/2 bg-orange-500 rounded-l-lg p-5'>
 
                 <div>
-                <img src="" alt="signup page image" />
+                    <img src="" alt="signup page image" />
                 </div>
 
             </section>
 
-            <section>
+            <section className='bg-white mb-20 sm:mb-0 w-full sm:w-1/2 rounded-lg sm:rounded-l-none flex flex-col gap-5 sm:p-5 p-3'>
 
-                <div>
-                    <div>Logo</div>
-                    <h2 className="text-center text-xl sm:text-2xl text-orange-400 font-bold leading-tight w-full">Sign up to create account</h2>
+                <div className='flex flex-col gap-5'>
 
-                    <p className="mt-2 text-center text-base text-amber-100/60">
-                        Already have an account?&nbsp;
-                        <Link
-                            to="/login"
-                            className="font-medium text-primary transition-all duration-200 hover:underline"
-                        >
-                            Sign-In
-                        </Link>
-                    </p>
+                    <div className='w-full flex justify-center items-center'>Logo</div>
+
+                    <div>
+                        <h2 className="text-center text-xl sm:text-2xl text-orange-400 font-bold leading-tight w-full">Sign up to create account</h2>
+
+                        <p className="mt-2 text-center text-base text-black/70">
+                            Already have an account?&nbsp;
+                            <Link
+                                to="/login"
+                                className="font-medium text-primary transition-all duration-200 hover:underline"
+                            >
+                                Sign-In
+                            </Link>
+                        </p>
+                    </div>
 
                 </div>
 

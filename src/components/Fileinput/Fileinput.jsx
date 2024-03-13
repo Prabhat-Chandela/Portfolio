@@ -4,15 +4,18 @@ function Fileinput({
     className="",
     children,
     ...props
-}) {
+},ref) {
+
+  
+
+
   return (
-    <div className={`relative bg-orange-500 ${className} w-[10%] px-3 py-5 rounded-md overflow-hidden cursor-pointer`}>
+    <div className={` ${className} w-5 h-5 p-5 border bg-orange-500  border-black rounded-full overflow-hidden cursor-pointer flex items-center justify-center`}>
         
-        <div className='w-full bg-orange-500 inset-0 absolute z-20 text-black font-bold flex items-center justify-center'>{children}</div>
-         <input className='absolute inset-0 z-0 w-full' type="file" {...props}/>   
+         <input className='flex items-center justify-center' ref={ref} type="file" {...props}/>   
 
     </div>
   )
 }
 
-export default Fileinput
+export default  React.forwardRef(Fileinput)

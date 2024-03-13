@@ -28,7 +28,7 @@ export class AuthService {
 
     async logIn({email , password}) {
         try {
-            return await this.account.createEmailPasswordSession(email, password);
+            return await this.account.createEmailSession(email, password);
         } catch (error) {
             console.log("Appwrite::logIn::error::" , error);
         }
