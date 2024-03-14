@@ -8,8 +8,7 @@ import { RiUserSettingsFill } from "react-icons/ri";
 
 function Header() {
 
-  const authStatus = useSelector((state) => state.auth.status)
-  console.log(authStatus)
+  const authStatus = useSelector((state) => state.auth.status);
 
   const navItems = [
     {
@@ -55,7 +54,7 @@ function Header() {
     <>
       <header className='hidden sm:block bg-transparent w-full h-full py-7'>
 
-        <nav className='flex flex-col items-start justify-center px-5 py-3 gap-y-16 w-full '>
+        <nav className='flex flex-col items-start justify-between px-5 py-3 gap-y-16 w-full '>
 
           <ul className='flex flex-col gap-10 px-3 text-sm font-semibold items-center justify-center '>
             {navItems.map((item) => item.active ? (
@@ -70,7 +69,6 @@ function Header() {
               </li>
 
             ) : null)}
-
             {authStatus && (<li><LogoutBtn /></li>)}
 
           </ul>

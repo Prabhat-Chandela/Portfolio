@@ -11,7 +11,7 @@ function Button({
 
 }) {
     return (
-        <button className={`w-fit px-3 font-bold text-sm py-1 rounded-md ${bgColor} ${textColor} ${className}`} {...props}>
+        <button className={`w-fit px-3 font-bold text-sm flex items-center justify-center gap-1 py-1 rounded-md ${bgColor} ${textColor} ${className}`} {...props}>
             {children}
         </button>
     )
