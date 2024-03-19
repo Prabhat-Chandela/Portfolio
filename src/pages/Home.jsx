@@ -1,19 +1,28 @@
-import React , {useEffect} from 'react'
-import {useSelector} from 'react-redux'
-import {useNavigate} from 'react-router-dom';
+import React, { useEffect} from 'react';
+import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { Postform } from '../components/index';
+
 
 function Home() {
-  const userStatus = useSelector((state)=>state.auth.status);
+  const userStatus = useSelector((state) => state.auth.status);
   const navigate = useNavigate()
 
-  useEffect(()=>{
-    if(!userStatus){
+  useEffect(() => {
+    if (!userStatus) {
       navigate('/login')
     }
-  },[userStatus])
-
+  }, [userStatus])
+ 
   return (
-    <div className='p-3 grid gird-col-12 grid-row-12'>
+    <div className='p-3'>
+      <section className='bg-white w-full rounded-lg px-3 sm:px-5 py-4'>
+        <Postform/>
+      </section>
+
+      <section>
+
+      </section>
 
     </div>
   )

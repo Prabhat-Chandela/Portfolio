@@ -7,7 +7,7 @@ import Select from "./Select/Select";
 import Signup from "./Signup/Signup";
 import Login from "./Login/Login";
 import Protected from "./Protected/Protected";
-import Fileinput from "./Fileinput/Fileinput";
+import Postform from "./Postform/Postform";
 import Topbar from "./Topbar/Topbar";
 
 export {
@@ -20,6 +20,6 @@ export {
     Signup,
     Login,
     Protected,
-    Fileinput,
+    Postform,
     Topbar,
 }
