@@ -3,6 +3,8 @@ import { Inputfield, Button } from '../index'
 import { useForm } from 'react-hook-form'
 import { Link, useNavigate } from 'react-router-dom'
 import authService from '../../appwrite/authService'
+import databaseService from '../../appwrite/databaseService'
+import bucketService from '../../appwrite/bucketService'
 import { login as storeLogin } from '../../store/authSlice'
 import { useDispatch } from 'react-redux'
 
@@ -17,8 +19,18 @@ function Signup() {
             if (userData) {
                 const userData = await authService.getUser();
                 if (userData) {
-                    dispatch(storeLogin({ userData }));
-                    navigate('/')
+                    const { name, email, $id } = userData;
+                    const userId = $id
+                    const username = data.username;
+                    const bio = 'bio';
+                    const profileImage = data.profileimage[0]? await bucketService.uploadProfileImage(data.profileimage[0]):null;
+                    const profileimage = profileImage.$id;
+                    const loggedinUserData = await databaseService.createUserProfile({ name, email, username, profileimage, bio, userId })
+                    if (loggedinUserData) {
+                        console.log(loggedinUserData);
+                        dispatch(storeLogin({ userData: loggedinUserData }));
+                        navigate('/')
+                    }
                 }
             }
         } catch (error) {
@@ -68,7 +80,7 @@ function Signup() {
 
                             <Inputfield
                                 label="Full name"
-                                placeholder="Enter your name"
+                                placeholder="Enter your full name"
                                 {...register("name", {
                                     required: true
                                 })}
@@ -94,6 +106,17 @@ function Signup() {
                                             "Email address must be a valid address",
                                     }
 
+                                })}
+                            />
+
+                            <Inputfield
+                                label="ProfileImage"
+                                placeholder="Choose a profile image"
+                                type="file"
+                                accept="image/*"
+                                className={"file:bg-transparent file:text-orange-500 file:border-none file:text-sm file:cursor-pointer"}
+                                {...register("profileimage", {
+                                    required: true
                                 })}
                             />
 

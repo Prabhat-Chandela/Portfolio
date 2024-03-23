@@ -1,6 +1,6 @@
-import React , {useRef} from 'react'
+import React, { useRef } from 'react'
 import { FaVideo, FaImage } from "react-icons/fa";
-import { Button, Inputfield} from '../index';
+import { Button, Inputfield } from '../index';
 
 function Postform() {
     const videoInputRef = useRef(null);
@@ -8,11 +8,13 @@ function Postform() {
 
     const handleVideoButtonClick = () => {
         videoInputRef.current.click();
-      };
-    
-      const handleImageButtonClick = () => {
+    };
+
+    const handleImageButtonClick = () => {
         imageInputRef.current.click();
-      };
+        console.log(imageInputRef.current.value)
+    };
+
 
     return (
         <div className='flex flex-col gap-3 '>
@@ -20,21 +22,22 @@ function Postform() {
                 <Inputfield label={"Caption"} />
             </div>
 
-            <div className='flex items-center gap-3 sm:gap-7 w-full'>
+            <div className='flex flex-col sm:flex-row items-center gap-3 sm:gap-7 w-full'>
 
-                <div className='sm:w-[70%]'>
+                <div className='w-full sm:w-[70%]'>
                     <Inputfield label={"Location"} />
                 </div>
 
-                <div className='flex items-center gap-2 sm:gap-5'>
+                <div className='flex items-center justify-start w-full gap-2 sm:gap-5'>
 
-                    <div>
-                        <input type="file" ref={videoInputRef} style={{ display: 'none' }} />
-                        <Button onClick={handleVideoButtonClick}><FaVideo /></Button>
-                    </div>
-                    <div>
+                    <div className='p-2 sm:p-3 rounded-lg bg-orange-500'>
                         <input type="file" ref={imageInputRef} style={{ display: 'none' }} />
                         <Button onClick={handleImageButtonClick}><FaImage /></Button>
+                    </div>
+
+                    <div className='p-2 sm:p-3 rounded-lg bg-orange-500'>
+                        <input type="file" ref={videoInputRef} style={{ display: 'none' }} />
+                        <Button onClick={handleVideoButtonClick}><FaVideo /></Button>
                     </div>
 
                     <Button>Post</Button>

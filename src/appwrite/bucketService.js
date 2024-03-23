@@ -20,9 +20,9 @@ export class BucketService {
         }
     }
 
-    async uploadProfileImage(profileImage) {
+    async uploadProfileImage(profileImagefile) {
         try {
-            return await this.bucket.createFile(config.appwriteProfileImageBucketId, ID.unique(), profileImage);
+            return await this.bucket.createFile(config.appwriteProfileImageBucketId, ID.unique(), profileImagefile);
         } catch (error) {
             console.log("Appwrite::uploadProfileImage::error::" , error);
         }

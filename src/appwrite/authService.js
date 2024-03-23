@@ -12,9 +12,9 @@ export class AuthService {
         this.account = new Account(this.client);
     }
 
-    async signUp({email , password , name , username}){
+    async signUp({email , password , name }){
         try{
-            const userAccount = await this.account.create(ID.unique(), email, password , name , username);
+            const userAccount = await this.account.create(ID.unique(), email, password , name);
             if(userAccount){
                 return this.logIn({email , password})
             }else{

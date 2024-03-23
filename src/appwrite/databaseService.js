@@ -13,10 +13,11 @@ export class DatabaseService {
     }
 
 
-    async createUserProfile({username,email,bio,profileimage,userId}) {
+    async createUserProfile({name,username,email,bio,profileimage,userId}) {
         try {
             return await this.databases.createDocument(config.appwriteDatabaseId, config.appwriteUsersCollectionId, userId,
             {
+                name,
                 username,
                 email,
                 bio,
