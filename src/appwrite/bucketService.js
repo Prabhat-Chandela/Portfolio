@@ -28,6 +28,14 @@ export class BucketService {
         }
     }
 
+    async deleteProfileImage(profileimageId){
+        try {
+            return await this.bucket.deleteFile(config.appwriteProfileImageBucketId, profileimageId);
+        } catch (error) {
+            console.log("Appwrite::deleteProfileImage::error::" , error);
+        }
+    }
+
     async uploadVideoFile(videoFile) {
         try {
             return await this.bucket.createFile(config.appwriteVideoBucketId, ID.unique(), videoFile);

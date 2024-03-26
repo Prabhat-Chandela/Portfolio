@@ -9,6 +9,7 @@ import Login from "./Login/Login";
 import Protected from "./Protected/Protected";
 import Postform from "./Postform/Postform";
 import Topbar from "./Topbar/Topbar";
+import Profileform from "./Profileform/Profileform";
 
 export {
     Inputfield,
@@ -22,4 +23,5 @@ export {
     Protected,
     Postform,
     Topbar,
+    Profileform,
 }

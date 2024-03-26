@@ -2,7 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App.jsx'
 import './index.css'
-import { Home, Signup, Saved, Settings, Login, User } from './pages/index.js'
+import { Home, Signup, Saved, Settings, Login, User , CreateProfile } from './pages/index.js'
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 import { Provider } from 'react-redux'
 import store from './store/store.js'
@@ -57,6 +57,14 @@ const router = createBrowserRouter([
         element: (
           <Protected authentication>
             <User />
+          </Protected>
+        ),
+      },
+      {
+        path: "/create-profile",
+        element: (
+          <Protected authentication={false}>
+            <CreateProfile />
           </Protected>
         ),
       },

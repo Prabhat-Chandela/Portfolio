@@ -4,6 +4,7 @@ import Signup from './Signup'
 import Settings from './Settings'
 import Saved from './Saved'
 import User from './User'
+import CreateProfile from './CreateProfile'
 
 export {
     Home,
@@ -12,4 +13,5 @@ export {
     Saved,
     Settings,
     User,
+    CreateProfile,
 }
