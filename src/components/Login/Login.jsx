@@ -4,6 +4,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { login as storeLogin } from '../../store/authSlice'
 import authService from '../../appwrite/authService'
+import databaseService from '../../appwrite/databaseService'
 import { Inputfield, Button } from '../index'
 
 function Login() {
@@ -14,9 +15,11 @@ function Login() {
         try {
             const userData = await authService.logIn(data);
             if (userData) {
-                const userData = await authService.getUser();
-                if (userData) {
-                    dispatch(storeLogin({ userData }));
+                const loggedInUserData = await authService.getUser();
+                if (loggedInUserData) {
+                    const userId = loggedInUserData.$id;
+                    const userProfileData = await databaseService.getUserProfile(userId);
+                    dispatch(storeLogin({ loggedInUserData , userProfileData}));
                     navigate('/');
                 }
             }

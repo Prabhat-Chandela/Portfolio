@@ -28,6 +28,14 @@ export class BucketService {
         }
     }
 
+     profileImagePreview(profileimageId) {
+        try {
+            return  this.bucket.getFilePreview(config.appwriteProfileImageBucketId, profileimageId);
+        } catch (error) {
+            console.log("Appwrite::profileImagePreview::error::" , error);
+        }
+    }
+
     async deleteProfileImage(profileimageId){
         try {
             return await this.bucket.deleteFile(config.appwriteProfileImageBucketId, profileimageId);

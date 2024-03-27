@@ -11,7 +11,6 @@ function Profileform({ profile }) {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const signedUpUserData = useSelector((state) => state.auth.signedUpUserData);
-    console.log(signedUpUserData)
 
     const { register, handleSubmit } = useForm({
         defaultValues: {
@@ -84,8 +83,7 @@ function Profileform({ profile }) {
                         placeholder="Tell us about yourself"
                         {...register("bio")}
                     />
-
-
+                    
                     <Button type='submit' >Create</Button>
 
                 </div>

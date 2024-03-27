@@ -32,17 +32,25 @@ export class DatabaseService {
 
     async updateUserProfile({ name, username, email, bio, profileimage, userId }) {
         try {
-           return await this.databases.updateDocument(config.appwriteDatabaseId, config.appwriteUsersCollectionId, userId,
-            {
-                name,
-                username,
-                email,
-                bio,
-                profileimage
-            }
-        );
+            return await this.databases.updateDocument(config.appwriteDatabaseId, config.appwriteUsersCollectionId, userId,
+                {
+                    name,
+                    username,
+                    email,
+                    bio,
+                    profileimage
+                }
+            );
         } catch (error) {
             console.log("Appwrite::updateUserProfile::error::", error);
+        }
+    }
+
+    async getUserProfile(userId) {
+        try {
+            return await this.databases.getDocument(config.appwriteDatabaseId,config.appwriteUsersCollectionId, userId);
+        } catch (error) {
+            console.log("Appwrite::getUserProfile::error::", error);
         }
     }
 
