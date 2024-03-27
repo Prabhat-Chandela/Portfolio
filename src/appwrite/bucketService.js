@@ -30,7 +30,7 @@ export class BucketService {
 
      profileImagePreview(profileimageId) {
         try {
-            return  this.bucket.getFilePreview(config.appwriteProfileImageBucketId, profileimageId);
+            return this.bucket.getFilePreview(config.appwriteProfileImageBucketId, profileimageId);
         } catch (error) {
             console.log("Appwrite::profileImagePreview::error::" , error);
         }
