@@ -1,10 +1,22 @@
-import React, { useRef } from 'react'
+import React, { useRef, useState } from 'react'
 import { FaVideo, FaImage } from "react-icons/fa";
-import { Button, Inputfield } from '../index';
+import { Button, Inputfield, Select } from '../index';
+import { useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import databaseService from '../../appwrite/databaseService';
+import bucketService from '../../appwrite/bucketService';
 
 function Postform() {
+    const navigate = useNavigate();
+    const { handleSubmit, register } = useForm();
+    const dispatch = useDispatch();
+    const loggedInUserData = useSelector((state) => state.auth.loggedInUserData);
+
     const videoInputRef = useRef(null);
     const imageInputRef = useRef(null);
+    const [imageInputValue, setImageInputValue] = useState(null);
+    const [videoInputValue, setVideoInputValue] = useState(null);
 
     const handleVideoButtonClick = () => {
         videoInputRef.current.click();
@@ -12,38 +24,73 @@ function Postform() {
 
     const handleImageButtonClick = () => {
         imageInputRef.current.click();
-        console.log(imageInputRef.current.value)
     };
 
+    const createPost = async (data) => {
+        let postimage = null;
+        let postvideo = null;
+
+        if (imageInputValue) {
+            const postImageFile = await bucketService.uploadImageFile(imageInputValue);
+            if (postImageFile) {
+                const postImageId = postImageFile.$id;
+                postimage = postImageId;
+            }
+        }
+
+        if (videoInputValue) {
+            const postVideoFile = await bucketService.uploadVideoFile(videoInputValue);
+            if (postVideoFile) {
+                const postVideoId = postVideoFile.$id;
+                postvideo = postVideoId;
+            }
+        }
+
+        const dbpost = await databaseService.createPost({ ...data, postImage: postimage ? postimage : null, postVideo: postvideo ? postvideo : null, userId: loggedInUserData.$id })
+        console.log(dbpost);
+        if (dbpost) {
+            console.log(dbpost);
+        }
+    }
 
     return (
-        <div className='flex flex-col gap-3 '>
-            <div className='w-full'>
-                <Inputfield label={"Caption"} />
-            </div>
-
-            <div className='flex flex-col sm:flex-row items-center gap-3 sm:gap-7 w-full'>
-
-                <div className='w-full sm:w-[70%]'>
-                    <Inputfield label={"Location"} />
+        <form onSubmit={handleSubmit(createPost)}>
+            <div className='flex flex-col gap-3 '>
+                <div className='w-full'>
+                    <Inputfield label={"Caption"}
+                        {...register('caption', { required: true })} />
                 </div>
 
-                <div className='flex items-center justify-start w-full gap-2 sm:gap-5'>
+                <div className='flex flex-col sm:flex-row items-center gap-3 sm:gap-7 w-full'>
 
-                    <div className='p-2 sm:p-3 rounded-lg bg-orange-500'>
-                        <input type="file" ref={imageInputRef} style={{ display: 'none' }} />
-                        <Button onClick={handleImageButtonClick}><FaImage /></Button>
+                    <div className='w-full sm:w-[70%]'>
+                        <Inputfield label={"Location"}
+                            {...register('location', { required: true })} />
                     </div>
 
-                    <div className='p-2 sm:p-3 rounded-lg bg-orange-500'>
-                        <input type="file" ref={videoInputRef} style={{ display: 'none' }} />
-                        <Button onClick={handleVideoButtonClick}><FaVideo /></Button>
-                    </div>
+                    <div className='flex flex-wrap items-center justify-start w-full gap-2 sm:gap-3'>
 
-                    <Button>Post</Button>
+                        <div className='p-2 sm:p-3 rounded-lg bg-orange-500'>
+                            <input type="file" ref={imageInputRef} style={{ display: 'none' }}
+                                onChange={(e) => { setImageInputValue(e.target.files[0]) }} />
+                            <Button onClick={handleImageButtonClick}><FaImage /></Button>
+                        </div>
+
+                        <div className='p-2 sm:p-3 rounded-lg bg-orange-500'>
+                            <input type="file" ref={videoInputRef} style={{ display: 'none' }}
+                                onChange={(e) => { setVideoInputValue(e.target.files[0]) }} />
+                            <Button onClick={handleVideoButtonClick}><FaVideo /></Button>
+                        </div>
+
+                        <Select label={'status'}
+                            options={['public', 'private']}
+                            {...register('status', { required: true })} />
+
+                        <Button type='submit'>Post</Button>
+                    </div>
                 </div>
             </div>
-        </div>
+        </form>
     )
 }
 

@@ -1,4 +1,4 @@
-import { Client, Databases, ID, Permission, Role } from "appwrite";
+import { Client, Databases, ID } from "appwrite";
 import config from "../config/config";
 
 export class DatabaseService {
@@ -54,13 +54,14 @@ export class DatabaseService {
         }
     }
 
-    async createPost({ caption, location, featuredfile, filetype, status, userId }) {
+    async createPost({ caption, location, postImage, postVideo, filetype, status, userId }) {
         try {
             return await this.databases.createDocument(config.appwriteDatabaseId, config.appwritePostsCollectionId, ID.unique(),
                 {
                     caption,
                     location,
-                    featuredfile,
+                    postImage,
+                    postVideo,
                     status,
                     filetype,
                     userId
@@ -87,7 +88,6 @@ export class DatabaseService {
                 {
                     caption,
                     location,
-                    featuredfile,
                     status,
                     filetype,
                     userId

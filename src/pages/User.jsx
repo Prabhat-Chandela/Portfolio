@@ -52,6 +52,7 @@ function User() {
 
         <div className='flex flex-col gap-2'>
           <h3 className='flex items-center justify-center gap-2 font-semibold text-orange-500 text-sm sm:text-lg w-fit '><span><FaInfoCircle /></span> User Bio : </h3>
+          <h5 className='text-black flex gap-2 text-sm sm:text-md'><span>Name :</span>{userProfileData && userProfileData?.name}</h5>
           <p className='text-black flex gap-2 text-sm sm:text-md'>{userProfileData && userProfileData?.bio}</p>
         </div>
 
