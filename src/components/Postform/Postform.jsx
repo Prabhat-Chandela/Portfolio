@@ -27,8 +27,8 @@ function Postform() {
     };
 
     const createPost = async (data) => {
-        let postimage = null;
-        let postvideo = null;
+        let postimage ;
+        let postvideo ;
 
         if (imageInputValue) {
             const postImageFile = await bucketService.uploadImageFile(imageInputValue);
@@ -46,11 +46,16 @@ function Postform() {
             }
         }
 
-        const dbpost = await databaseService.createPost({ ...data, postImage: postimage ? postimage : null, postVideo: postvideo ? postvideo : null, userId: loggedInUserData.$id })
-        console.log(dbpost);
-        if (dbpost) {
-            console.log(dbpost);
+        if (!postimage && !postvideo) {
+            console.log('Please select either a postImage or a postVideo. Both cannot be empty.');
+            return;
         }
+
+            const dbpost = await databaseService.createPost({ ...data, postImage: postimage ? postimage : null, postVideo: postvideo ? postvideo : null, userId: loggedInUserData.$id })
+            console.log(dbpost);
+            if (dbpost) {
+                console.log(dbpost);
+            }   
     }
 
     return (
